@@ -1,8 +1,9 @@
 """
-if x and y have same prime factors then gcd, d of x and y will have those
-prime factors as well, to remove those common prime factors from x and y take gcd,
-da of d and x and keep diving x with da until da is 1 or x is 1, repeat similar
-procedure for y, both x and y should reduce to 1 if they have same prime factors
+let d = gcd(a, b)
+d contains common prime factors of a and b
+remove common prime factors with their powers
+from prime factorisation a and b, if a and b
+reduce to 1 it means they have same prime factors
 """
 
 
@@ -16,23 +17,19 @@ def solution(A, B):
     n = len(A)
     ans = 0
     for i in range(n):
-        if A[i] == B[i]:
-            ans += 1
-            continue
         d = gcd(A[i], B[i])
-        if d != 1:
-            a = A[i] // d
-            b = B[i] // d
-            while True:
-                da = gcd(a, d)
-                if da == 1 or a == 1:
-                    break
-                a /= da
-            while True:
-                db = gcd(b, d)
-                if db == 1 or b == 1:
-                    break
-                b /= db
-            if a == 1 and b == 1:
-                ans += 1
+        a = A[i] // d
+        b = B[i] // d
+        da = gcd(d, a)
+        db = gcd(d, b)
+        while not (da == 1 or a == 1):
+            # remove common factor of a and d, from a
+            a /= da
+            da = gcd(d, a)
+        while not (db == 1 or b == 1):
+            # remove common factor of b and d, from b
+            b /= db
+            db = gcd(b, d)
+        if a == 1 and b == 1:
+            ans += 1
     return ans
