@@ -6,6 +6,7 @@ then # of divisors are (e1 + 1) * (e2 + 1) * .... * (ek + 1)
 runtime complexity: O(sqrt(N))
 """
 
+
 def solution(N):
     ans = 1
     fac = 2
